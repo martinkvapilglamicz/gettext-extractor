@@ -49,7 +49,7 @@ class GettextExtractor_Filters_PHPFilter extends GettextExtractor_Filters_AFilte
 
 	public function enterNode(PHPParser_Node $node) {
 		$name = null;
-		if (($node instanceof PHPParser_Node_Expr_MethodCall || $node instanceof PHPParser_Node_Expr_StaticCall) && is_string($node->name)) {
+                if (($node instanceof \PhpParser\Node\Expr\MethodCall || $node instanceof \PhpParser\Node\Expr\StaticCall) && $node->name instanceof \PhpParser\Node\Identifier && is_string($node->name->name)) {
 			$name = $node->name;
 		} elseif ($node instanceof PHPParser_Node_Expr_FuncCall && $node->name instanceof PHPParser_Node_Name) {
 			$parts = $node->name->parts;
